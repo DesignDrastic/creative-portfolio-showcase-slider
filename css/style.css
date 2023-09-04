@@ -1,0 +1,206 @@
+/* CSS variables */
+:root {
+  --clr-dark: #121212;
+  --bg: cornsilk;
+  --font: 'Playfair Display', serif;
+  --item-height: 500px;
+  --svg-shape-width: 400px;
+  --svg-shape-height: 400px;
+}
+/* Reset default browser properties. */
+body {
+  margin: 0;
+  padding: 0;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.portfolio {
+  transition: all 1.5s;
+  background: var(--bg);
+}
+.portfolio-content {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  transition: all 1.5s;
+  z-index: 1;
+}
+.portfolio-item {
+  position: absolute;
+  display: flex;
+  height: 50vh;
+  min-height: var(--item-height);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+}
+.portfolio-item.active {
+  position: relative;
+  opacity: 1;
+  z-index: 9;
+}
+/*Project title*/
+.portfolio-title {
+  position: relative;
+  margin: 0;
+  font-family: var(--font);
+  font-weight: 500;
+  color: var(--clr-dark);
+  letter-spacing: 1px;
+  font-size: 7rem;
+}
+/* Project subtitle */
+.portfolio-subtitle {
+  position: absolute;
+  display: inline-block;
+  top: -50px;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+/* Explore button */
+.portfolio-btn {
+  position: absolute;
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  bottom: -50px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font);
+  font-weight: 600;
+  color: var(--clr-dark);
+  font-size: 1rem;
+  outline: none;
+  transform: translateX(-1.5rem);
+  opacity: 0;
+  transition: all 1s;
+}
+.portfolio-item.active .portfolio-btn {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* Background SVG Shape */
+.background-shape {
+  position: absolute;
+  width: var(--svg-shape-width);
+  height: var(--svg-shape-height);
+  z-index: -1;
+}
+/* Project slider nav */
+/* Prev / Next */
+.portfolio-nav {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 1.5rem;
+  transition: all .5s;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9;
+}
+.portfolio-nav.prev {
+  left: 100px;
+}
+.portfolio-nav.next {
+  right: 100px;
+}
+/* Animations */
+/* Project title animation */
+.dd-animate__title span {
+  opacity: 0;
+  display: inline-block;
+  transform: translateY(2.5rem) scale(.75);
+}
+.portfolio-item.active .dd-animate__title span {
+  transition: var(--transition);
+  transition-delay: var(--delay);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+/* Project subtitle animation */
+.dd-animate__subtitle span {
+  display: inline-block;
+  transform: translateX(20px);
+  transition: var(--transition);
+  transition-delay: var(--delay) !important;
+  opacity: 0;
+}
+.portfolio-item.active .dd-animate__subtitle span {
+  transform: translateX(0);
+  opacity: 1;
+}
+/* Project subtitle underline */
+.dd-animate__subtitle::after {
+  position: absolute; 
+  content: "";
+  top: calc(50% + 4px);
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--clr-dark);
+  transform-origin: right;
+  transition-delay: .75s !important;
+  transition: all 1s;
+}
+/* Project subtitle underline animation */
+.portfolio-item.active .dd-animate__subtitle::after {
+  width: 100px;
+  left: -120px;
+}
+/* Char / letters hover animation */
+.dd-animate__span span {
+  position: relative;
+  display: inline-block;
+  transform: translateY(5px) scale(.75);
+  transition: all .75s;
+  opacity: 0;
+  transition-delay: var(--delay);
+  letter-spacing: 2px;
+}
+/* Explore btn hover animation */
+.dd-animate:hover .dd-animate__span span {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+/* Media query */
+@media (max-width: 768px) {
+  /* Project items */
+  .portfolio-item {
+    height: 70vh;
+    min-height: auto;
+  }
+  .portfolio-title {
+    font-size: 3rem;
+  }
+  /* SVG shape */
+  .background-shape {
+    width: 75%;
+    height: auto;
+  }
+  /* Nav */
+  .portfolio-nav {
+    top: 100px;
+  }
+  .portfolio-nav.prev {
+    left: 0;
+  }
+  .portfolio-nav.next {
+    right: 0;
+  }
+}
